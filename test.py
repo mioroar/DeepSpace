@@ -18,7 +18,8 @@ def expect(proc, pattern):
         buffer += proc.stdout.read(1).decode()
         if pattern.endswith(buffer):
             return True
-        else: print(False)
+        else:
+            print(False)
 
 
 def write(proc, text):
@@ -34,7 +35,7 @@ def test_greeting():
         bas = process('deepspaceSOURCE.bas')
         py = process('python deepspace.py')
 
-    # Ожидаемое приветственное сообщение
+        # Ожидаемое приветственное сообщение
         expected_greeting = '''
                         DEEPSPACE                                  
                     CREATIVE COMPUTING                             
@@ -92,26 +93,74 @@ YOU HAVE A CHOICE OF THREE SYSTEMS TO PATROL.
 3 ARCTURUS
 SELECT A SYSTEM(1-3): 
 '''
-    # Приветствие
+        choose_ship = '''WHICH SPACECRAFT WOULD YOU LIKE(1-3) '''
+        cargo = '''YOU HAVE  30 UNITS OF CARGO SPACE TO FILL WITH WEAPONRY.
+CHOOSE A WEAPON AND THE AMOUNT YOU WISH. '''
+
+        # Приветствие
         print("Expecting greetings...")
         expect(bas, expected_greeting)
         expect(py, expected_greeting)
         print("TEST 1 - PASS")
-    # инструкции
+        # инструкции
         print("TEST send yes to inst")
         write(bas, "Y")
         write(py, "Y")
         expect(bas, instruction)
         expect(py, instruction)
         print("TEST 2 - PASS")
-    # выбор системы
+        # выбор системы
         print("TEST choose system")
         write(bas, "2")
         write(py, "2")
-        expect(bas, instruction)
-        expect(py, instruction)
-        print("TEST 2 - PASS")
+        expect(bas, choose_ship)
+        expect(py, choose_ship)
+        print("TEST 3 - PASS")
+
+        # Выбор корабля
+        print("TEST choose ship")
+        write(bas, "3")  # Выбор battleship
+        write(py, "3")
+        expect(bas, cargo)
+        expect(py, cargo)
+        print("TEST 4 - PASS")
+
+        # Выбор оружия
+        print("TEST choose weapons")
+        write(bas, "1 1")  # Выбор Phaser Banks на 12 единиц
+        write(py, "1 1")
+        expect(bas, "YOU HAVE  18 UNITS OF CARGO SPACE TO FILL WITH WEAPONRY."
+                    "CHOOSE A WEAPON AND THE AMOUNT YOU WISH. ")
+        expect(py, "YOU HAVE  18 UNITS OF CARGO SPACE TO FILL WITH WEAPONRY."
+                   "CHOOSE A WEAPON AND THE AMOUNT YOU WISH. ")
+        print("TEST 5 - PASS")
+
+        write(bas, "2 4")  # Выбор Anti-Matter Missiles на 16 единиц
+        write(py, "2 4")
+        expect(bas, "YOU HAVE  2 UNITS OF CARGO SPACE TO FILL WITH WEAPONRY."
+                    "CHOOSE A WEAPON AND THE AMOUNT YOU WISH. ")
+        expect(py, "YOU HAVE  2 UNITS OF CARGO SPACE TO FILL WITH WEAPONRY."
+                   "CHOOSE A WEAPON AND THE AMOUNT YOU WISH. ")
+        print("TEST 6 - PASS")
+
+        write(bas, "4 1")  # Выбор Photon Torpedoes на 2 единицы
+        write(py, "4 1")
+        expect(bas, "RANGE TO TARGET: 500"
+                    "RELATIVE VELOCITY: 0"
+                    "ACTION ")
+        expect(py, "RANGE TO TARGET: 500"
+                   "RELATIVE VELOCITY: 0"
+                   "ACTION ")
+        write(bas, 6)  # Завершение выбора
+        write(py, 6)
+        expect(bas, "SELF DESTRUCT FAILSAFE ACTIVATED!!"
+                    "INPUT 1 TO RELEASE FAILSAFE ")
+        expect(py, "SELF DESTRUCT FAILSAFE ACTIVATED!!"
+                   "INPUT 1 TO RELEASE FAILSAFE ")
+        print("TEST 7 - PASS")
+
     except Exception as ex:
         print(ex)
+
 
 test_greeting()
