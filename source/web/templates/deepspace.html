@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSpace - Command Center</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #e0e1dd;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #1b263b;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            white-space: pre-wrap;
+            font-size: 1em;
+            color: #e0e1dd;
+        }
+        input[type="text"] {
+            padding: 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #3a506b;
+            width: 80%;
+            margin-bottom: 10px;
+            color: #1b263b;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #e0e1dd;
+            background-color: #3a506b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #5bc0be;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DeepSpace - Command Center</h1>
+        <p>{{ text }}</p>
+        <form action="/deepspace" method="post">
+            <input type="text" id="command" name="command" placeholder="Enter command" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
