@@ -1,15 +1,19 @@
 import random
 
 
-def deepspace_battle():
+# print("DO YOU WISH INSTRUCTIONS?")
+#     # i = input("DO YOU WISH INSTRUCTIONS? ")
+#     i = input()
+
+def deepspace_game():
     print(" " * 24 + "DEEPSPACE")
     print(" " * 20 + "CREATIVE COMPUTING")
-    print(" " * 18 + "MORRISTOWN NEW JERSEY\n\n\n")
+    print(" " * 18 + "MORRISTOWN, NEW JERSEY")
+    print("\n\n")
+
     print("THIS IS DEEPSPACE, A TACTICAL SIMULATION OF SHIP TO SHIP")
     print("COMBAT IN DEEP SPACE.")
-    print("DO YOU WISH INSTRUCTIONS?")
-    # i = input("DO YOU WISH INSTRUCTIONS? ")
-    i = input()
+    i = input("DO YOU WISH INSTRUCTIONS? ")
     if i.upper() != "NO":
         print("YOU ARE ONE OF A GROUP OF CAPTAINS ASSIGNED TO PATROL A")
         print("SECTION OF YOUR STAR EMPIRE'S BORDER AGAINST HOSTILE")
@@ -193,8 +197,40 @@ def deepspace_battle():
                     print("SELECT ANOTHER COURSE OF ACTION")
                     continue
                 n4 -= 1
-                z, p1 = 400
+                z, p1 = 400, 10
+            elif m == 5:
+                if n5 == 0:
+                    print("HYPERON NEUTRALIZATION FIELD DRAINED")
+                    print("SELECT ANOTHER COURSE OF ACTION")
+                    continue
+                n5 -= 1
+                z, p1 = 250, 6
+
+            f0 = p1 * (z / r) ** 1.5
+            d0 = (2 * f0 + 3 * f0 * random.random()) / 5
+            d += d0
+            print(f"SCANNERS REPORT ENEMY DAMAGE NOW: {d}")
+            if d > 99:
+                print("ENEMY VESSEL DESTROYED")
+                break
+
+            k = e1 + e2 * random.random()
+            e = e3 + e4 * random.random() + 5 / p0 * random.random()
+            f3 = e * (k / r) ** 1.85
+            d2 = (3 * f3 + 3 * f3 * random.random()) / 5.5
+            d1 += d2
+            if (z * d0) / (r * 500) > 2.2:
+                d3 = d0 * 2 / (r * 2 * p0)
+                d1 += d3
+            print(f"DAMAGE CONTROL REPORTS YOUR VESSEL DAMAGE AT: {d1}")
+            if d1 > 99:
+                print("YOUR VESSEL HAS BEEN DESTROYED")
+                break
+
+    r = input("ANOTHER BATTLE? ")
+    if r.upper() != "YES":
+        print("TRY AGAIN LATER!")
 
 
 if __name__ == "__main__":
-    deepspace_battle()
+    deepspace_game()

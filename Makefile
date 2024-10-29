@@ -1,9 +1,9 @@
 PYTHON=python3
 PYINSTALLER=pyinstaller
-FILE_NAME=cup.py
-WINDOWS_SOURCE=.\cup.py
-LINUX_SOURCE=`pwd`/cup.py
-PLAN9_SOURCE=/sys/src/cmd/python/cup.py
+FILE_NAME=deepspace.py
+WINDOWS_SOURCE=.\deepspace.py
+LINUX_SOURCE=`pwd`/deepspace.py
+PLAN9_SOURCE=/sys/src/cmd/python/deepspace.py
 WINDOWS_OUTPUT=.\output\windows
 LINUX_OUTPUT=`pwd`/output/linux
 PLAN9_OUTPUT=/usr/local/bin/

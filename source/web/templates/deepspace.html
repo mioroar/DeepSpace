@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepSpace - Command Center</title>
+    <title>DeepSpace Game</title>
     <style>
         body {
             display: flex;
@@ -27,21 +27,7 @@
             font-size: 2em;
             margin-bottom: 20px;
         }
-        p {
-            white-space: pre-wrap;
-            font-size: 1em;
-            color: #e0e1dd;
-        }
-        input[type="text"] {
-            padding: 8px;
-            font-size: 1em;
-            border-radius: 5px;
-            border: 1px solid #3a506b;
-            width: 80%;
-            margin-bottom: 10px;
-            color: #1b263b;
-        }
-        input[type="submit"] {
+        button, input[type="text"] {
             padding: 10px 20px;
             font-size: 1em;
             color: #e0e1dd;
@@ -51,18 +37,27 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        input[type="submit"]:hover {
+        button:hover, input[type="text"]:hover {
             background-color: #5bc0be;
+        }
+        input[type="text"] {
+            width: calc(100% - 44px);
+            margin-right: 10px;
+        }
+        pre {
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>DeepSpace - Command Center</h1>
-        <p>{{ text }}</p>
-        <form action="/deepspace" method="post">
-            <input type="text" id="command" name="command" placeholder="Enter command" required>
-            <input type="submit" value="Submit">
+        <h1>DeepSpace Game</h1>
+        <pre>{{ output|safe }}</pre>
+        <form action="/" method="post">
+            <input type="text" name="command" placeholder="Enter your command">
+            <button type="submit">Submit</button>
         </form>
     </div>
 </body>
