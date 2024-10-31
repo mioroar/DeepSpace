@@ -61,8 +61,7 @@ def deepspace_battle(user_input=None):
         output += "CHOOSE A WEAPON AND THE AMOUNT YOU WISH (TYPE AMOUNT)\n"
         if user_input:
             weapon_type, amount = map(int, user_input.split())
-            space_needed = amount * (
-                12 if weapon_type == 1 else 4 if weapon_type in [2, 3] else 2 if weapon_type == 4 else 20)
+            space_needed = amount * (12 if weapon_type == 1 else 4 if weapon_type in [2, 3] else 2 if weapon_type == 4 else 20)
             if space_needed <= game_state['cargo_space']:
                 if weapon_type == 1:
                     game_state['weapons']['phasers'] += amount
