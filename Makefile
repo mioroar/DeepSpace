@@ -10,7 +10,7 @@ PLAN9_OUTPUT=/usr/local/bin/
 WINDOWS_OPTIONS=--onefile --console
 LINUX_OPTIONS=--onefile --console
 CLEANING_FILE=clear.py
-all: windows linux web
+all: windows linux web android
 
 windows:
 	pip install -r requirements.txt
@@ -38,8 +38,14 @@ linux:
 	@echo
 
 
+android:
+	@echo "Building for Android..."
+	@pip install buildozer
+	buildozer -v android debug
+	@echo "Built APK located in bin/"
+
 clean:
 	@echo "Cleaning..."
 	python $(CLEANING_FILE)
 
-.PHONY: all windows linux web clean
+.PHONY: all windows linux web android clean
